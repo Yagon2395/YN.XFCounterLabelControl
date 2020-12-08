@@ -7,10 +7,22 @@
     <Description>Animated Counter Control for Xamarin.Forms(Android and iOS) with some awesome features that will make your users more satisfied when they look into their numbers.</Description>
     <Copyright>Yago Nunes</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</RepositoryUrl>
+    <PackageTags>Xamarin Xamarin.Forms Label CounterLabel AnimatedLabel</PackageTags>
+    <PackageReleaseNotes>1.0.0.0 - First version;</PackageReleaseNotes>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.725" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
