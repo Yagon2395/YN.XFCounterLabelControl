@@ -1,7 +1,8 @@
 # YN.XFCounterLabelControl
 
 <p>Animated Counter Control for Xamarin.Forms(Android and iOS) with some awesome features that will make your users more satisfied when they look into their numbers.</p>
-
+<h2>Nuget Package</h2>
+* Available on NuGet: https://www.nuget.org/packages/YN.XFCounterLabelControl [![NuGet](https://img.shields.io/nuget/v/YN.XFCounterLabelControl.svg?label=NuGet)](https://www.nuget.org/packages/YN.XFCounterLabelControl/)
 <h2>Preview</h2>
 <div margin: 0px auto; text-align: center;>
 <h3>Android</h3>
