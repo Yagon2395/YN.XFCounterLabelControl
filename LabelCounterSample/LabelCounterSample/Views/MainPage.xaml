@@ -56,7 +56,7 @@
                         AnimationDuration="1000"
                         CounterType="Integer"
                         StartValue="0"
-                        TargetValue="1000"
+                        TargetValue="0"
                         Style="{StaticResource IndicatorLabelStyle}"/>
 
                     <Label

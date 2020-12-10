@@ -10,8 +10,12 @@
     <PackageProjectUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</RepositoryUrl>
     <PackageTags>Xamarin Xamarin.Forms Label CounterLabel AnimatedLabel</PackageTags>
-    <PackageReleaseNotes>1.0.0.0 - First version;</PackageReleaseNotes>
+    <PackageReleaseNotes>1.0.0.1 - Fixed bug start equals to target;
+1.0.0.0 - First version;</PackageReleaseNotes>
     <PackageIcon>icon.png</PackageIcon>
+    <Version>1.0.0.1</Version>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

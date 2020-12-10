@@ -55,7 +55,7 @@ namespace YN.XFCounterLabelControl
             nameof(TargetValue),
             typeof(int),
             typeof(CounterLabelControl),
-            0,
+            null,
             propertyChanged: OnTargetValuePropertyChanged);
 
         /// <summary>
@@ -72,26 +72,57 @@ namespace YN.XFCounterLabelControl
             if (bindable is CounterLabelControl)
             {
                 var ctrl = (CounterLabelControl)bindable;
-                Animation animation = null;
-
-                if (ctrl.CounterType == CounterTypeEnum.Double)
+                
+                
+                if(ctrl.StartValue == ctrl.TargetValue)
                 {
-                    animation = new Animation(v => ctrl.Text = v.ToString(), ctrl.StartValue, ctrl.TargetValue);
-                    animation.Commit(ctrl, "CounterAnimation", 16, ctrl.AnimationDuration, Easing.Linear, (v, c) => ctrl.Text = ctrl.TargetValue.ToString(), () => false);
-                }
-                else if (ctrl.CounterType == CounterTypeEnum.Currency)
-                {
-                    CurrencyConverter currencyConverter = new CurrencyConverter();
-                    animation = new Animation(v => ctrl.Text = currencyConverter.Convert(v, typeof(double), null, CultureInfo.CurrentCulture).ToString(), ctrl.StartValue, ctrl.TargetValue);
-                    animation.Commit(ctrl, "CounterAnimation", 16, ctrl.AnimationDuration, Easing.Linear, (v, c) => ctrl.Text = currencyConverter.Convert(ctrl.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString(), () => false);
+                    ctrl.HandleTargetEqualsToStart();
                 }
                 else
                 {
-                    animation = new Animation(v => ctrl.Text = ((int)v).ToString(), ctrl.StartValue, ctrl.TargetValue);
-                    animation.Commit(ctrl, "CounterAnimation", 16, ctrl.AnimationDuration, Easing.Linear, (v, c) => ctrl.Text = ctrl.TargetValue.ToString(), () => false);
-                }
+                    ctrl.HandleAnimation();
+                }                
             }
-        }        
+        } 
+        
+        private void HandleTargetEqualsToStart()
+        {
+            if (this.CounterType == CounterTypeEnum.Double)
+            {
+                this.Text = ((double)this.TargetValue).ToString();
+            }
+            else if (this.CounterType == CounterTypeEnum.Currency)
+            {
+                CurrencyConverter currencyConverter = new CurrencyConverter();
+                this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString();
+            }
+            else
+            {
+                this.Text = this.TargetValue.ToString();
+            }
+        }
+        
+        private void HandleAnimation()
+        {
+            Animation animation = null;
+
+            if (this.CounterType == CounterTypeEnum.Double)
+            {
+                animation = new Animation(v => this.Text = v.ToString(), this.StartValue, this.TargetValue);
+                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
+            }
+            else if (this.CounterType == CounterTypeEnum.Currency)
+            {
+                CurrencyConverter currencyConverter = new CurrencyConverter();
+                animation = new Animation(v => this.Text = currencyConverter.Convert(v, typeof(double), null, CultureInfo.CurrentCulture).ToString(), this.StartValue, this.TargetValue);
+                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString(), () => false);
+            }
+            else
+            {
+                animation = new Animation(v => this.Text = ((int)v).ToString(), this.StartValue, this.TargetValue);
+                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
+            }
+        }
 
         public static readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(
             nameof(AnimationDuration),
