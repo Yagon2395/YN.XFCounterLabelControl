@@ -53,7 +53,7 @@ namespace YN.XFCounterLabelControl
 
         public static readonly BindableProperty TargetValueProperty = BindableProperty.Create(
             nameof(TargetValue),
-            typeof(int),
+            typeof(int?),
             typeof(CounterLabelControl),
             null,
             propertyChanged: OnTargetValuePropertyChanged);
