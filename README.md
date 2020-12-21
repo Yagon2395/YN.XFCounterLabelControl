@@ -6,13 +6,13 @@
 * Available on NuGet: https://www.nuget.org/packages/YN.XFCounterLabelControl [![NuGet](https://img.shields.io/nuget/v/YN.XFCounterLabelControl.svg?label=NuGet)](https://www.nuget.org/packages/YN.XFCounterLabelControl/)
 
 ## Preview
-<div margin: 0px auto; text-align: center;>
+
 ### Android
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioAndroid.gif" width="300"/>
 
 ### iOS
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioiOS.gif" width="300"/>
-</div>
+
 
 ## How to Use
 ```XAML
