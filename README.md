@@ -5,7 +5,7 @@
 ### Setup
 * Available on NuGet: https://www.nuget.org/packages/YN.XFCounterLabelControl [![NuGet](https://img.shields.io/nuget/v/YN.XFCounterLabelControl.svg?label=NuGet)](https://www.nuget.org/packages/YN.XFCounterLabelControl/)
 
-<h2>Preview</h2>
+### Preview
 <div margin: 0px auto; text-align: center;>
 <h3>Android</h3>
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioAndroid.gif" width="300"/>
@@ -14,7 +14,17 @@
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioiOS.gif" width="300"/>
 </div>
 
-<h2>Features</h2>
+### How to Use
+```XAML
+<xfcounterlabelcontrol:CounterLabelControl
+  AnimationDuration="1000"
+  CounterType="Integer"
+  StartValue="0"
+  TargetValue="0"
+  TextColor="DodgerBlue"/>
+```
+
+### Features
 <table style="width:100%">
   <tr>
     <th>Properties</th>
@@ -43,9 +53,12 @@
   </tr>
 </table>
 
-<h4>Contact</h4>
+### Contact
 <div>
   Any questions, issues or improvements feel free to contact me.
   <br>
   yagon2395@gmail.com
 </div>
+
+### License
+GPL-3.0-or-later
