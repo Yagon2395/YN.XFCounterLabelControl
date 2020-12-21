@@ -2,19 +2,19 @@
 
 <p>Animated Counter Control for Xamarin.Forms(Android and iOS) with some awesome features that will make your users more satisfied when they look into their numbers.</p>
 
-### Setup
+## Setup
 * Available on NuGet: https://www.nuget.org/packages/YN.XFCounterLabelControl [![NuGet](https://img.shields.io/nuget/v/YN.XFCounterLabelControl.svg?label=NuGet)](https://www.nuget.org/packages/YN.XFCounterLabelControl/)
 
-### Preview
+## Preview
 <div margin: 0px auto; text-align: center;>
-<h3>Android</h3>
+### Android
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioAndroid.gif" width="300"/>
 
-<h3>iOS</h3>
+### iOS
 <img src="https://github.com/Yagon2395/YN.XFCounterLabelControl/blob/master/Images/cenarioiOS.gif" width="300"/>
 </div>
 
-### How to Use
+## How to Use
 ```XAML
 <xfcounterlabelcontrol:CounterLabelControl
   AnimationDuration="1000"
@@ -24,7 +24,7 @@
   TextColor="DodgerBlue"/>
 ```
 
-### Features
+## Features
 <table style="width:100%">
   <tr>
     <th>Properties</th>
