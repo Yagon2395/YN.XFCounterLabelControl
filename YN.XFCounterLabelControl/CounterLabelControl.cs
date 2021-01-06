@@ -1,24 +1,26 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Xamarin.Forms;
-using System.Collections.Generic;
-using System.Text;
 using YN.XFCounterLabelControl.Converters;
 
 namespace YN.XFCounterLabelControl
-{
-    public enum CounterTypeEnum
-    {
-        Integer,
-        Double,
-        Currency
-    }
-
+{   
     public class CounterLabelControl : Label
     {
-        public CounterLabelControl()
-        {
+        public CounterLabelControl() { }
 
+        public static readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(
+            nameof(AnimationDuration),
+            typeof(uint),
+            typeof(CounterLabelControl),
+            (uint)2000);
+
+        /// <summary>
+        /// The time duration for the animation.
+        /// </summary>
+        public uint AnimationDuration
+        {
+            get { return (uint)GetValue(AnimationDurationProperty); }
+            set { SetValue(AnimationDurationProperty, value); }
         }
 
         public static readonly BindableProperty CounterTypeProperty = BindableProperty.Create(
@@ -122,21 +124,6 @@ namespace YN.XFCounterLabelControl
                 animation = new Animation(v => this.Text = ((int)v).ToString(), this.StartValue, this.TargetValue);
                 animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
             }
-        }
-
-        public static readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(
-            nameof(AnimationDuration),
-            typeof(uint),
-            typeof(CounterLabelControl),
-            (uint)2000);
-
-        /// <summary>
-        /// The time duration for the animation.
-        /// </summary>
-        public uint AnimationDuration
-        {
-            get { return (uint)GetValue(AnimationDurationProperty); }
-            set { SetValue(AnimationDurationProperty, value); }
-        }
+        }        
     }
 }

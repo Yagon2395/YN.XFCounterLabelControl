@@ -4,19 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Yago Nunes</Authors>
     <Company>Yago Nunes</Company>
-    <Description>Animated Counter Control for Xamarin.Forms(Android and iOS) with some awesome features that will make your users more satisfied when they look into their numbers.</Description>
-    <Copyright>Yago Nunes</Copyright>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Description>Animated Counter Control for Xamarin.Forms(Android and iOS) is an extended Label with some awesome features that will make your users more satisfied when they look into their numbers.</Description>
+    <Copyright>Copyright 2020-2021 Yago Nunes</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</RepositoryUrl>
-    <PackageTags>Xamarin Xamarin.Forms Label CounterLabel AnimatedLabel</PackageTags>
-    <PackageReleaseNotes>1.0.0.2 - Changed type of TargetValueProperty from int to int?;
+    <PackageTags>xamarin, xamarin.forms, label, counter label, animated label, custom label, indicator, android, ios, number, fluid label, dynamic label,  animated number</PackageTags>
+    <PackageReleaseNotes>1.0.0.3 - Updated License to MIT;
+1.0.0.2 - Changed type of TargetValueProperty from int to int?;
 1.0.0.1 - Fixed bug start equals to target;
 1.0.0.0 - First version;</PackageReleaseNotes>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.0.2</Version>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
+    <Version>1.0.0.3</Version>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <FileVersion>1.0.0.3</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
