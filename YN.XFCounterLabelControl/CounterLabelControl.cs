@@ -1,9 +1,10 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Xamarin.Forms;
 using YN.XFCounterLabelControl.Converters;
 
 namespace YN.XFCounterLabelControl
-{   
+{
     public class CounterLabelControl : Label
     {
         public CounterLabelControl() { }
@@ -55,7 +56,7 @@ namespace YN.XFCounterLabelControl
 
         public static readonly BindableProperty TargetValueProperty = BindableProperty.Create(
             nameof(TargetValue),
-            typeof(int?),
+            typeof(double?),
             typeof(CounterLabelControl),
             null,
             propertyChanged: OnTargetValuePropertyChanged);
@@ -63,9 +64,9 @@ namespace YN.XFCounterLabelControl
         /// <summary>
         /// The target value for the animation.
         /// </summary>
-        public int TargetValue
+        public double TargetValue
         {
-            get { return (int)GetValue(TargetValueProperty); }
+            get { return (double)GetValue(TargetValueProperty); }
             set { SetValue(TargetValueProperty, value); }
         }
 
@@ -74,56 +75,70 @@ namespace YN.XFCounterLabelControl
             if (bindable is CounterLabelControl)
             {
                 var ctrl = (CounterLabelControl)bindable;
-                
-                
-                if(ctrl.StartValue == ctrl.TargetValue)
+
+
+                if (ctrl.StartValue == ctrl.TargetValue)
                 {
                     ctrl.HandleTargetEqualsToStart();
                 }
                 else
                 {
                     ctrl.HandleAnimation();
-                }                
-            }
-        } 
-        
-        private void HandleTargetEqualsToStart()
-        {
-            if (this.CounterType == CounterTypeEnum.Double)
-            {
-                this.Text = ((double)this.TargetValue).ToString();
-            }
-            else if (this.CounterType == CounterTypeEnum.Currency)
-            {
-                CurrencyConverter currencyConverter = new CurrencyConverter();
-                this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString();
-            }
-            else
-            {
-                this.Text = this.TargetValue.ToString();
+                }
             }
         }
-        
+
+        private void HandleTargetEqualsToStart()
+        {
+            try
+            {
+                if (this.CounterType == CounterTypeEnum.Double)
+                {
+                    this.Text = ((double)this.TargetValue).ToString();
+                }
+                else if (this.CounterType == CounterTypeEnum.Currency)
+                {
+                    CurrencyConverter currencyConverter = new CurrencyConverter();
+                    this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString();
+                }
+                else
+                {
+                    this.Text = this.TargetValue.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+
         private void HandleAnimation()
         {
-            Animation animation = null;
+            try
+            {
+                Animation animation = null;
 
-            if (this.CounterType == CounterTypeEnum.Double)
-            {
-                animation = new Animation(v => this.Text = v.ToString(), this.StartValue, this.TargetValue);
-                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
+                if (this.CounterType == CounterTypeEnum.Double)
+                {
+                    animation = new Animation(v => this.Text = v.ToString(), this.StartValue, this.TargetValue);
+                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
+                }
+                else if (this.CounterType == CounterTypeEnum.Currency)
+                {
+                    CurrencyConverter currencyConverter = new CurrencyConverter();
+                    animation = new Animation(v => this.Text = currencyConverter.Convert(v, typeof(double), null, CultureInfo.CurrentCulture).ToString(), this.StartValue, this.TargetValue);
+                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString(), () => false);
+                }
+                else
+                {
+                    animation = new Animation(v => this.Text = ((int)v).ToString(), this.StartValue, (int)this.TargetValue);
+                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = ((int)this.TargetValue).ToString(), () => false);
+                }
             }
-            else if (this.CounterType == CounterTypeEnum.Currency)
+            catch (Exception ex)
             {
-                CurrencyConverter currencyConverter = new CurrencyConverter();
-                animation = new Animation(v => this.Text = currencyConverter.Convert(v, typeof(double), null, CultureInfo.CurrentCulture).ToString(), this.StartValue, this.TargetValue);
-                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString(), () => false);
+                return;
             }
-            else
-            {
-                animation = new Animation(v => this.Text = ((int)v).ToString(), this.StartValue, this.TargetValue);
-                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
-            }
-        }        
+        }
     }
 }

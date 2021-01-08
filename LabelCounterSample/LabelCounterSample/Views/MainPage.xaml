@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xfcounterlabelcontrol="clr-namespace:YN.XFCounterLabelControl;assembly=YN.XFCounterLabelControl"
              x:Class="LabelCounterSample.Views.MainPage"
-             Title="Animated Counter Sample">
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -56,7 +56,7 @@
                         AnimationDuration="1000"
                         CounterType="Integer"
                         StartValue="0"
-                        TargetValue="0"
+                        TargetValue="1000"
                         Style="{StaticResource IndicatorLabelStyle}"/>
 
                     <Label
@@ -147,9 +147,9 @@
 
                     <xfcounterlabelcontrol:CounterLabelControl
                         AnimationDuration="4000"
-                        CounterType="Integer"
+                        CounterType="Currency"
                         StartValue="0"
-                        TargetValue="1000"
+                        TargetValue="{Binding Money}"
                         Style="{StaticResource IndicatorLabelStyle}"/>
 
                     <Label

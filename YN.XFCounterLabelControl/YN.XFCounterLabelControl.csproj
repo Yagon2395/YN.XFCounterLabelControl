@@ -10,14 +10,15 @@
     <PackageProjectUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yagon2395/YN.XFCounterLabelControl</RepositoryUrl>
     <PackageTags>xamarin, xamarin.forms, label, counter label, animated label, custom label, indicator, android, ios, number, fluid label, dynamic label,  animated number</PackageTags>
-    <PackageReleaseNotes>1.0.0.3 - Updated License to MIT;
+    <PackageReleaseNotes>1.0.0.4 - Fixed floating point values of currency mode;
+1.0.0.3 - Updated License to MIT;
 1.0.0.2 - Changed type of TargetValueProperty from int to int?;
 1.0.0.1 - Fixed bug start equals to target;
 1.0.0.0 - First version;</PackageReleaseNotes>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.0.3</Version>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
+    <Version>1.0.0.4</Version>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
