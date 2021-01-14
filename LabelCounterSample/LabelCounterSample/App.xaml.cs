@@ -28,6 +28,7 @@ namespace LabelCounterSample
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<TestPage, TestPageViewModel>();
         }
     }
 }

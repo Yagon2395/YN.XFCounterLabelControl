@@ -14,4 +14,10 @@
     <ProjectReference Include="..\..\YN.XFCounterLabelControl\YN.XFCounterLabelControl.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Views\TestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

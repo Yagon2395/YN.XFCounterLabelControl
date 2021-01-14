@@ -116,7 +116,7 @@
 
                     <xfcounterlabelcontrol:CounterLabelControl
                         AnimationDuration="3000"
-                        CounterType="Integer"
+                        CounterType="Double"
                         StartValue="0"
                         TargetValue="1000"
                         Style="{StaticResource IndicatorLabelStyle}"/>
@@ -159,6 +159,19 @@
                 </StackLayout>
             </Frame>
             <!--#endregion-->
+
+            <Button 
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Dispose"
+                TextColor="White"
+                BackgroundColor="DodgerBlue"
+                CornerRadius="60"
+                HeightRequest="120"
+                WidthRequest="120"
+                Command="{Binding NavigateCommand}"/>
         </Grid>
     </ContentPage.Content>
 

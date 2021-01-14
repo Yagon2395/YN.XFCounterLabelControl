@@ -41,24 +41,24 @@ namespace YN.XFCounterLabelControl
 
         public static readonly BindableProperty StartValueProperty = BindableProperty.Create(
             nameof(StartValue),
-            typeof(int),
+            typeof(double),
             typeof(CounterLabelControl),
-            0);
+            default(double));
 
         /// <summary>
         /// The start value for the animation.
         /// </summary>
-        public int StartValue
+        public double StartValue
         {
-            get { return (int)GetValue(StartValueProperty); }
+            get { return (double)GetValue(StartValueProperty); }
             set { SetValue(StartValueProperty, value); }
         }
 
         public static readonly BindableProperty TargetValueProperty = BindableProperty.Create(
             nameof(TargetValue),
-            typeof(double?),
+            typeof(double),
             typeof(CounterLabelControl),
-            null,
+            default(double),
             propertyChanged: OnTargetValuePropertyChanged);
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace YN.XFCounterLabelControl
 
                 if (this.CounterType == CounterTypeEnum.Double)
                 {
-                    animation = new Animation(v => this.Text = v.ToString(), this.StartValue, this.TargetValue);
-                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString(), () => false);
+                    animation = new Animation(v => this.Text = v.ToString("F2"), this.StartValue, this.TargetValue);
+                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString("F2"), () => false);
                 }
                 else if (this.CounterType == CounterTypeEnum.Currency)
                 {
