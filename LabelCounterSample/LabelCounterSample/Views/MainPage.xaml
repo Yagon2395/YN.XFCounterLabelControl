@@ -87,7 +87,7 @@
                         AnimationDuration="2000"
                         CounterType="Integer"
                         StartValue="0"
-                        TargetValue="1000"
+                        TargetValue="{Binding Money}"
                         Style="{StaticResource IndicatorLabelStyle}"/>
 
                     <Label
@@ -118,7 +118,7 @@
                         AnimationDuration="3000"
                         CounterType="Double"
                         StartValue="0"
-                        TargetValue="1000"
+                        TargetValue="{Binding Money}"
                         Style="{StaticResource IndicatorLabelStyle}"/>
 
                     <Label

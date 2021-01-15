@@ -7,7 +7,10 @@ namespace YN.XFCounterLabelControl
 {
     public class CounterLabelControl : Label
     {
-        public CounterLabelControl() { }
+        public CounterLabelControl()
+        {
+            this.Text = GetFormatedText(this.StartValue, this.CounterType);
+        }
 
         public static readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(
             nameof(AnimationDuration),
@@ -28,7 +31,18 @@ namespace YN.XFCounterLabelControl
             nameof(CounterType),
             typeof(CounterTypeEnum),
             typeof(CounterLabelControl),
-            CounterTypeEnum.Integer);
+            CounterTypeEnum.Integer,
+            propertyChanged: OnCounterTypePropertyChanged);
+
+        private static void OnCounterTypePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable is CounterLabelControl)
+            {
+                var ctrl = (CounterLabelControl)bindable;
+
+                ctrl.Text = ctrl.GetFormatedText(ctrl.StartValue, ctrl.CounterType);
+            }
+        }        
 
         /// <summary>
         /// Type of the data.
@@ -79,7 +93,7 @@ namespace YN.XFCounterLabelControl
 
                 if (ctrl.StartValue == ctrl.TargetValue)
                 {
-                    ctrl.HandleTargetEqualsToStart();
+                    ctrl.Text = ctrl.GetFormatedText(ctrl.TargetValue, ctrl.CounterType);
                 }
                 else
                 {
@@ -88,52 +102,51 @@ namespace YN.XFCounterLabelControl
             }
         }
 
-        private void HandleTargetEqualsToStart()
+        /// <summary>
+        /// Format string based on CounterType.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        string GetFormatedText(double value, CounterTypeEnum type)
         {
-            try
+            string text = string.Empty;
+            if (type == CounterTypeEnum.Double)
             {
-                if (this.CounterType == CounterTypeEnum.Double)
-                {
-                    this.Text = ((double)this.TargetValue).ToString();
-                }
-                else if (this.CounterType == CounterTypeEnum.Currency)
-                {
-                    CurrencyConverter currencyConverter = new CurrencyConverter();
-                    this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString();
-                }
-                else
-                {
-                    this.Text = this.TargetValue.ToString();
-                }
+                text = value.ToString("F2");
             }
-            catch (Exception ex)
+            else if (type == CounterTypeEnum.Currency)
             {
-                return;
+                CurrencyConverter currencyConverter = new CurrencyConverter();
+                text = currencyConverter.Convert(value, typeof(double), null, CultureInfo.CurrentCulture).ToString();
             }
+            else
+            {
+                text = ((int)value).ToString();
+            }
+
+            return text;
         }
 
+        /// <summary>
+        /// Here's where the magic happens.
+        /// </summary>
         private void HandleAnimation()
         {
             try
             {
-                Animation animation = null;
+                Action<double> callbackAction = delegate (double v)
+                {
+                    this.Text = this.GetFormatedText(v, this.CounterType);
+                };
 
-                if (this.CounterType == CounterTypeEnum.Double)
+                Action<double, bool> finishedAction = delegate (double value, bool canceled)
                 {
-                    animation = new Animation(v => this.Text = v.ToString("F2"), this.StartValue, this.TargetValue);
-                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = this.TargetValue.ToString("F2"), () => false);
-                }
-                else if (this.CounterType == CounterTypeEnum.Currency)
-                {
-                    CurrencyConverter currencyConverter = new CurrencyConverter();
-                    animation = new Animation(v => this.Text = currencyConverter.Convert(v, typeof(double), null, CultureInfo.CurrentCulture).ToString(), this.StartValue, this.TargetValue);
-                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = currencyConverter.Convert(this.TargetValue, typeof(double), null, CultureInfo.CurrentCulture).ToString(), () => false);
-                }
-                else
-                {
-                    animation = new Animation(v => this.Text = ((int)v).ToString(), this.StartValue, (int)this.TargetValue);
-                    animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, (v, c) => this.Text = ((int)this.TargetValue).ToString(), () => false);
-                }
+                    this.Text = this.GetFormatedText(this.TargetValue, this.CounterType);
+                };
+
+                Animation animation = new Animation(callbackAction, this.StartValue, this.TargetValue);
+                animation.Commit(this, "CounterAnimation", 16, this.AnimationDuration, Easing.Linear, finishedAction, () => false);
             }
             catch (Exception ex)
             {
